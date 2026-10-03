@@ -1,0 +1,167 @@
+@import "tailwindcss";
+
+/*
+  Design system — one accent per theme, neutral fields.
+  Men:   emerald + antique gold on warm ivory.
+  Women: deep plum + rose gold on soft blush.
+*/
+:root,
+:root[data-theme="men"] {
+  --bg: #f5f2e9;
+  --surface: #ffffff;
+  --ink: #12241c;
+  --muted: #5e6e65;
+  --line: #e3dece;
+  --primary: #0f4a36;
+  --primary-ink: #ffffff;
+  --accent: #b88a2e;
+  --tint: #e6efe9;
+  --hero-a: #0a3427;
+  --hero-b: #176650;
+}
+
+:root[data-theme="women"] {
+  --bg: #fbf4f2;
+  --surface: #ffffff;
+  --ink: #2a1626;
+  --muted: #7b6574;
+  --line: #f0e0dd;
+  --primary: #6a2c5b;
+  --primary-ink: #ffffff;
+  --accent: #c0806f;
+  --tint: #f7e9ef;
+  --hero-a: #4a1d41;
+  --hero-b: #844072;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-primary: var(--primary);
+  --color-primary-ink: var(--primary-ink);
+  --color-accent: var(--accent);
+  --color-tint: var(--tint);
+  --color-ok: #2f8f5b;
+  --color-warn: #c47a1c;
+  --color-bad: #b5403a;
+  --font-sans: var(--font-tajawal), system-ui, sans-serif;
+  --font-quran: var(--font-amiri), serif;
+}
+
+html {
+  background: var(--bg);
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-tajawal), system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.hero {
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 56 56'%3E%3Cpath d='M28 6l5.5 12.5L47 14l-4.5 13.5L56 28l-13.5 5.5L47 47l-13.5-4.5L28 56l-5.5-13.5L9 47l4.5-13.5L0 28l13.5-5.5L9 9l13.5 4.5z' fill='none' stroke='%23ffffff' stroke-opacity='.09' stroke-width='1'/%3E%3C/svg%3E"),
+    linear-gradient(160deg, var(--hero-a), var(--hero-b));
+  color: #fff;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 52px;
+  padding: 0 22px;
+  border-radius: 16px;
+  font-weight: 700;
+  background: var(--primary);
+  color: var(--primary-ink);
+  transition: transform 0.12s, opacity 0.12s;
+}
+.btn:active {
+  transform: scale(0.98);
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--primary);
+  border: 1.5px solid var(--line);
+}
+
+.field {
+  width: 100%;
+  min-height: 54px;
+  padding: 0 16px;
+  border-radius: 14px;
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  color: var(--ink);
+  outline: none;
+}
+.field:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--primary) 14%, transparent);
+}
+
+.quran {
+  font-family: var(--font-amiri), serif;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.rise {
+  animation: rise 0.5s both;
+}
+
+/* ---------- celebration ---------- */
+@keyframes pop {
+  0% { transform: scale(0.4); opacity: 0; }
+  60% { transform: scale(1.12); opacity: 1; }
+  100% { transform: scale(1); }
+}
+@keyframes confetti {
+  to { transform: translateY(105dvh) rotate(540deg); opacity: 0.9; }
+}
+@keyframes flame {
+  0%, 100% { transform: scale(1) rotate(-3deg); }
+  50% { transform: scale(1.12) rotate(3deg); }
+}
+.pop { animation: pop 0.55s cubic-bezier(0.2, 1.4, 0.4, 1) both; }
+.flame { animation: flame 1.4s ease-in-out infinite; display: inline-block; }
+.confetti > i {
+  position: absolute;
+  top: -20px;
+  width: 9px;
+  height: 14px;
+  border-radius: 2px;
+  animation: confetti 2.6s linear forwards;
+}
+.bar { height: 10px; border-radius: 999px; background: color-mix(in srgb, var(--primary) 14%, transparent); overflow: hidden; }
+.bar > i { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--accent), color-mix(in srgb, var(--accent) 60%, white)); transition: width 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.hero .bar { background: rgba(255, 255, 255, 0.2); }
+.star-badge {
+  display: grid; place-items: center; width: 46px; height: 46px; flex-shrink: 0;
+  background: color-mix(in srgb, var(--accent) 22%, white);
+  color: color-mix(in srgb, var(--accent) 80%, black);
+  font-weight: 800;
+  clip-path: polygon(50% 0%, 61% 18%, 82% 14%, 82% 36%, 100% 46%, 88% 64%, 96% 86%, 74% 86%, 62% 100%, 50% 86%, 38% 100%, 26% 86%, 4% 86%, 12% 64%, 0% 46%, 18% 36%, 18% 14%, 39% 18%);
+}

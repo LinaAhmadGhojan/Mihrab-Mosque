@@ -1,0 +1,24 @@
+# dependencies / build output
+node_modules/
+.next/
+out/
+dist/
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+
+# local data and config
+*.db
+*.sqlite3
+.env
+.env.local
+.DS_Store
+
+# Android local files (the Capacitor project has its own .gitignore too)
+apps/web/android/local.properties
+apps/web/android/.gradle/
+apps/web/android/**/build/
+apps/web/android/app/src/main/assets/public/
+apps/web/android/app/src/main/assets/capacitor.config.json
+apps/web/android/app/src/main/assets/capacitor.plugins.json
